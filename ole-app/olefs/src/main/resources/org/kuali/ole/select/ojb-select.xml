@@ -3365,6 +3365,9 @@
             <foreignkey field-ref="receiptStatusId"/>
         </reference-descriptor>
         <!-- the account deletion is handled within our buildDeletionAwareLists, setting auto-delete=none as a workaround to Optimistic Locking Exception for now -->
+        <reference-descriptor name="itemUnitOfMeasure" class-ref="org.kuali.ole.sys.businessobject.UnitOfMeasure" auto-retrieve="true" auto-update="none" auto-delete="none" proxy="true" >
+            <foreignkey field-ref="itemUnitOfMeasureCode" />
+        </reference-descriptor>
         <collection-descriptor name="sourceAccountingLines" proxy="true" element-class-ref="org.kuali.ole.module.purap.businessobject.PaymentRequestAccount" collection-class="org.apache.ojb.broker.util.collections.ManageableArrayList" auto-retrieve="true" auto-update="object" auto-delete="none">
             <orderby name="accountNumber" sort="ASC" />
             <orderby name="financialObjectCode" sort="ASC" />
@@ -3581,6 +3584,12 @@
         </reference-descriptor>
         <reference-descriptor name="itemType" class-ref="org.kuali.ole.module.purap.businessobject.ItemType" auto-retrieve="true" auto-update="none" auto-delete="none" proxy="true" >
             <foreignkey field-ref="itemTypeCode" />
+        </reference-descriptor>
+        <reference-descriptor name="recurringPaymentType" class-ref="org.kuali.ole.module.purap.businessobject.RecurringPaymentType" auto-retrieve="true" auto-update="none" auto-delete="none" proxy="true" >
+            <foreignkey field-ref="recurringPaymentTypeCode" />
+        </reference-descriptor>
+        <reference-descriptor name="itemUnitOfMeasure" class-ref="org.kuali.ole.sys.businessobject.UnitOfMeasure" auto-retrieve="true" auto-update="none" auto-delete="none" proxy="true" >
+            <foreignkey field-ref="itemUnitOfMeasureCode" />
         </reference-descriptor>
         <!--Commented for issue in clone after Receiving PO -->
         <!--  <reference-descriptor name="oleReceiptStatus" class-ref="org.kuali.ole.select.businessobject.OleReceiptStatus" auto-retrieve="true" auto-update="none" auto-delete="none" proxy="true" >
@@ -5483,11 +5492,6 @@
                                auto-retrieve="false" auto-update="none" auto-delete="none" proxy="false">
             <inverse-foreignkey field-ref="oleERSIdentifier"/>
         </collection-descriptor>
-        <collection-descriptor name="oleERSInvoices" element-class-ref="org.kuali.ole.select.document.OLEEResourceInvoices"
-                               collection-class="org.apache.ojb.broker.util.collections.ManageableArrayList"
-                               auto-retrieve="true" auto-update="object" auto-delete="object" proxy="false">
-            <inverse-foreignkey field-ref="oleERSIdentifier"/>
-        </collection-descriptor>-->
         <collection-descriptor name="copyList" proxy="true" element-class-ref="org.kuali.ole.select.businessobject.OleCopy" collection-class="org.apache.ojb.broker.util.collections.ManageableArrayList" auto-retrieve="true" auto-update="object" auto-delete="none">
             <inverse-foreignkey field-ref="oleERSIdentifier" />
         </collection-descriptor>
