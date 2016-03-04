@@ -3,17 +3,9 @@ function openLightboxOnLoad(dialogId) {
     jQuery('.uif-dialogButtons').button();
 }
 
-function toggleCurrentLoanSection(){
-    jq( "#currentLoanListSection-HorizontalBoxSection" ).click(function() {
-        jq( "#currentLoanList-HorizontalBoxSection" ).toggle();
-    });
-}
 
-function toggleExistingLoanSection(){
-    jq( "#existingLoanItemListSection-HorizontalBoxSection" ).click(function() {
-        jq( "#existingLoanItemList-HorizontalBoxSection" ).toggle();
-    });
-}
+
+
 
 function openLightboxOnLoadWithOverrideParameters(dialogId,overrideParameters) {
     showLightboxComponent(dialogId, overrideParameters);
@@ -38,6 +30,13 @@ function printSlip(content){
     printWindow.print();
 }
 
+function assignDueDateAndTimeToAll(){
+    var divLength= jq('#alterDueDateDialog tbody tr').length;
+    for(var count=0;count<divLength;count++){
+        jq('#alterDueDate-dueDate_line'+count+'_control').val(jq('#alterDueDate-assignDueDateToAll_control').val());
+        jq('#alterDueDate-time_line'+count+'_control').val(jq('#alterDueDate-assignTimeToAll_control').val());
+    }
+}
 
 function alterDueDate(){
     var alterDueDateObjects = [];
@@ -163,6 +162,18 @@ jq(document).ready(function () {
             }
         }
     });
+
+
+        jq( "#existingLoanItemListSection-HorizontalBoxSection h3").live("click",function() {
+            jq( "#existingLoanItemList-HorizontalBoxSection" ).toggle();
+
+        });
+
+         jq( "#currentLoanListSection-HorizontalBoxSection h3" ).live("click",function() {
+            jq( "#currentLoanList-HorizontalBoxSection" ).toggle();
+        });
+
+
 });
 
 function setTimeoutInterval(interval){

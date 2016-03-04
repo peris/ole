@@ -998,14 +998,14 @@ attributeEntry="${itemAttributes.itemLocation}" width="10%"/>
                 <kul:htmlControlAttribute
                         attributeEntry="${itemAttributes.oleItemQuantity}"
                         property="document.item[${ctr}].oleItemQuantity"
-                        readOnly="${not amendmentEntry}"
+                        readOnly="${amendmentEntry}"
                         tabindexOverride="${tabindexOverrideBase + 0}" />
             </c:when>
             <c:when test="${itemLine.oleItemQuantity > 1 && !(itemLine.previousItemQuantity == itemLine.itemQuantity)}">
                 <kul:htmlControlAttribute
                         attributeEntry="${itemAttributes.oleItemQuantity}"
                         property="document.item[${ctr}].oleItemQuantity"
-                        readOnly="${not amendmentEntry}"
+                        readOnly="${amendmentEntry}"
                         tabindexOverride="${tabindexOverrideBase + 0}" />
             </c:when>
             <c:when test="${itemLine.oleItemQuantity == 1 && !(itemLine.previousItemNoOfParts == itemLine.itemNoOfParts)}">
@@ -1019,7 +1019,7 @@ attributeEntry="${itemAttributes.itemLocation}" width="10%"/>
                 <kul:htmlControlAttribute
                         attributeEntry="${itemAttributes.oleItemQuantity}"
                         property="document.item[${ctr}].oleItemQuantity"
-                        readOnly="${not amendmentEntry}"
+                        readOnly="${amendmentEntry}"
                         tabindexOverride="${tabindexOverrideBase + 0}" />
             </c:when>
             <c:otherwise>
@@ -1058,14 +1058,14 @@ attributeEntry="${itemAttributes.itemLocation}" width="10%"/>
                 <kul:htmlControlAttribute
                         attributeEntry="${itemAttributes.itemNoOfParts}"
                         property="document.item[${ctr}].itemNoOfParts"
-                        readOnly="${not amendmentEntry}"
+                        readOnly="${amendmentEntry}"
                         tabindexOverride="${tabindexOverrideBase + 0}" />
             </c:when>
             <c:when test="${itemLine.itemNoOfParts > 1 && !(itemLine.previousItemNoOfParts == itemLine.itemNoOfParts)}">
                 <kul:htmlControlAttribute
                         attributeEntry="${itemAttributes.itemNoOfParts}"
                         property="document.item[${ctr}].itemNoOfParts"
-                        readOnly="${not amendmentEntry}"
+                        readOnly="${amendmentEntry}"
                         tabindexOverride="${tabindexOverrideBase + 0}" />
             </c:when>
             <c:when test="${itemLine.itemNoOfParts == 1 && !(itemLine.previousItemQuantity == itemLine.itemQuantity)}">
@@ -1079,7 +1079,7 @@ attributeEntry="${itemAttributes.itemLocation}" width="10%"/>
                 <kul:htmlControlAttribute
                         attributeEntry="${itemAttributes.itemNoOfParts}"
                         property="document.item[${ctr}].itemNoOfParts"
-                        readOnly="${not amendmentEntry}"
+                        readOnly="${amendmentEntry}"
                         tabindexOverride="${tabindexOverrideBase + 0}" />
             </c:when>
             <c:otherwise>
@@ -1500,7 +1500,7 @@ attributeEntry="${itemAttributes.itemLocation}" width="10%"/>
                                 styleClass="tinybutton" />
                 </c:when>
                 <c:when
-                        test="${amendmentEntry and itemLine.canInactivateItem and itemLine.itemInvoicedTotalAmount != null}">
+                        test="${amendmentEntry and itemLine.canInactivateItem and itemLine.itemInvoicedTotalAmount == 0 and itemLine.copyList[0].receiptStatus ne 'Received'}">
                     <html:image property="methodToCall.inactivateItem.line${ctr}"
                                 src="${ConfigProperties.externalizable.images.url}tinybutton-inactivate.gif"
                                 alt="Inactivate Item ${ctr+1}" title="Inactivate Item ${ctr+1}"
@@ -1541,8 +1541,10 @@ attributeEntry="${itemAttributes.itemLocation}" width="10%"/>
                     <!-- <br>
                     <br> -->
                 </c:when>
+                <%--<c:when
+                        test="${amendmentEntry}">--%>
                 <c:when
-                        test="${amendmentEntry}">
+                        test="${amendmentEntry and itemLine.canInactivateItem and itemLine.itemInvoicedTotalAmount == 0 and itemLine.copyList[0].receiptStatus ne 'Received'}">
                     <html:image property="methodToCall.inactivateItem.line${ctr}"
                                 src="${ConfigProperties.externalizable.images.url}tinybutton-inactivate.gif"
                                 alt="Inactivate Item ${ctr+1}" title="Inactivate Item ${ctr+1}"
